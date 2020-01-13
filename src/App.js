@@ -1,25 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {Fragment, useReducer, useEffect} from 'react';
+import Map from "./components/Map"
+import stateReducer from './reducers/stateReducer'
+import { StateContext } from './states/store'
+import CurrentLocation from './components/LocationSetter'
 
-function App() {
+const initialState = {
+    center: {
+      lat: 32.1,
+      lng: 21
+    },
+    zoom: 3
+}
+
+
+const  App = () => {
+  const [store, dispatch] = useReducer(stateReducer, initialState)
+ async function fetchLocation(){
+
+    dispatch({
+      type: "setUserLocation", 
+      data: await CurrentLocation()
+    })
+
+  }
+
+  useEffect(() => { 
+    fetchLocation()
+  }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <StateContext.Provider value={{store, dispatch}}>
+      <Map/>
+    </StateContext.Provider>
+    </>
   );
 }
 
