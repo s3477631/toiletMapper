@@ -1,30 +1,38 @@
-import React from 'react';
-import GoogleMapReact from 'google-map-react';
+import React from 'react'
+import { GoogleMap, LoadScript } from '@react-google-maps/api'
 import { useGlobalState } from '../states/store';
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
- 
 
-const Map = props => { 
+const Map = () => {
     const {store} = useGlobalState()
     const {center} = store
+    const {latitude, longitude} = center
     const {zoom} = store
- 
     return (
-      <div style={{ height: '100vh', width: '100%' }}>
-        <GoogleMapReact
-          bootstrapURLKeys={{ key: process.env.REACT_APP_MAP_KEY}}
-          center={{lat: center.latitude,lng: center.longitude}}
-          zoom={zoom}
+        <LoadScript
+          id="script-loader"
+          googleMapsApiKey={process.env.REACT_APP_MAP_KEY}
         >
+          <GoogleMap
+            id='example-map'
+            mapContainerStyle={{height:'100vh', width: '100vw'}}
+            center={{lat: parseFloat(latitude),lng: parseFloat(longitude)}}
+            zoom={zoom}
+          >
             
-          <AnyReactComponent
-            lat={center.latitude}
-            lng={center.longitude}
-            text={`${zoom}`}
-          />
-        </GoogleMapReact>
-      </div>
-    )
+          </GoogleMap>
+        </LoadScript>
+       )
+
+
+
 }
+    
+
+
+
+
+
+
+
  
 export default Map;

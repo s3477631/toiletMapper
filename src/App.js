@@ -16,7 +16,6 @@ const initialState = {
 const  App = () => {
   const [store, dispatch] = useReducer(stateReducer, initialState)
  async function fetchLocation(){
-
     dispatch({
       type: "setUserLocation", 
       data: await CurrentLocation()
