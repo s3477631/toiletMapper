@@ -7,7 +7,10 @@ const Map = () => {
     const {center} = store
     const {latitude, longitude} = center
     const {zoom} = store
-
+    const initialForm = {
+        formInput
+    }
+ 
     const locations = [
         {lat:  parseFloat(-27.460989), lng: parseFloat(153.024654)},
         {lat:  parseFloat(-27.450989), lng: parseFloat(153.044654)},
@@ -20,14 +23,13 @@ const Map = () => {
         imagePath:"https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m" 
       }
 
-      const onClick = e => {
+      const onClick = (e) => {
         console.log(e)
           e.preventDefault()
       
         console.info('I have been clicked!')
       };
       
-
     return (
 <LoadScript
 id="script-loader"
@@ -53,8 +55,8 @@ googleMapsApiKey={process.env.REACT_APP_MAP_KEY}
         <h1>Add Property</h1>
         <form> 
             Address: 
-        <input type="text" name="address" />
-        <button onClick={onClick}>Add Point</button>
+        <input s/>
+        <button type="submit" onClick={onClick}>Add Point</button>
         </form>
       </div>
     </OverlayView>
