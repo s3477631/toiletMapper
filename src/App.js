@@ -12,7 +12,6 @@ const initialState = {
     zoom: 3
 }
 
-
 const  App = () => {
   const [store, dispatch] = useReducer(stateReducer, initialState)
  async function fetchLocation(){
@@ -20,9 +19,7 @@ const  App = () => {
       type: "setUserLocation", 
       data: await CurrentLocation()
     })
-
   }
-
   useEffect(() => { 
     fetchLocation()
   }, [])
