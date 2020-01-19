@@ -1,15 +1,12 @@
 import React from 'react'
-import { GoogleMap, LoadScript, MarkerClusterer, Marker, OverlayView } from '@react-google-maps/api'
+import { GoogleMap, LoadScript, MarkerClusterer, Marker } from '@react-google-maps/api'
 import { useGlobalState } from '../states/store';
-
 const Map = () => {
     const {store} = useGlobalState()
     const {center} = store
     const {latitude, longitude} = center
     const {zoom} = store
-    const initialForm = {
-        formInput
-    }
+ 
  
     const locations = [
         {lat:  parseFloat(-27.460989), lng: parseFloat(153.024654)},
@@ -23,12 +20,6 @@ const Map = () => {
         imagePath:"https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m" 
       }
 
-      const onClick = (e) => {
-        console.log(e)
-          e.preventDefault()
-      
-        console.info('I have been clicked!')
-      };
       
     return (
 <LoadScript
@@ -41,25 +32,6 @@ googleMapsApiKey={process.env.REACT_APP_MAP_KEY}
     zoom={zoom}
     center={{lat: parseFloat(latitude),lng: parseFloat(longitude)}}
   >
-      <OverlayView
-      position={{lat: parseFloat(latitude),lng: parseFloat(longitude)}}
-      mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
-    >
-      <div
-        style={{
-          background: `#bbb`,
-          border: `1px solid #ccc`,
-          padding: 15
-        }}
-      >
-        <h1>Add Property</h1>
-        <form> 
-            Address: 
-        <input s/>
-        <button type="submit" onClick={onClick}>Add Point</button>
-        </form>
-      </div>
-    </OverlayView>
     <MarkerClusterer
       options={options}
     >
